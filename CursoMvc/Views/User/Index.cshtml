@@ -1,0 +1,59 @@
+﻿@model List<CursoMvc.Models.TableVM.UsersVM>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Usuarios</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <input type="button"
+                   class="btn btn-primary"
+                   value="Nuevo Usuario" 
+                   onclick="document.location.href='@Url.Content("~/User/add")' "
+             />
+        </div>
+        
+    </div>
+<div class="row">
+    <div class="col-lg-12">
+        @if (Model.Any())
+        {
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Email</th>
+                        <th>Edad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var usuario in Model)
+                    {
+                        <tr>
+                            <td>
+                                @usuario.id
+                            </td>
+                            <td>
+                                @usuario.email
+                            </td>
+                            <td>
+                                @usuario.edad
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="row">
+                <h4>No hay usuarios registrados...</h4>
+            </div>
+        }
+
+    </div>
+
+</div>
+
+
+

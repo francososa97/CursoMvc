@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutLoguin.cshtml";
+}
+
+@section scripts{
+    <script>
+
+    $(document).ready(function () {
+
+        $("form").submit(function (e) {
+            e.preventDefault();
+            url = "@Url.Content("../../Registro/Enter")"
+            parametros = $(this).serialize();
+
+            $.post(url, parametros, function (data) {
+                if (data == "1") {
+                    document.location.href = "@Url.Content("../")"
+                }
+                else {
+                    alert(data);
+                }
+            });
+
+        })
+    })
+    </script>
+}
+
+
+<div class=" row">
+    <form id="form">
+        <h2>Index</h2>
+        <p>Usuario</p>
+        <input type="text" name="nameusuario" />
+        <p>Contraseña</p>
+        <input type="password" name="contraseña" />
+
+        <input type="submit" value="iniciar Secion" />
+    </form>
+
+</div>
+
+
