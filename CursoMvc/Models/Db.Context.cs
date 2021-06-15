@@ -27,5 +27,7 @@ namespace CursoMvc.Models
     
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Catalgo> Catalgo { get; set; }
+        public virtual DbSet<Animales> Animales { get; set; }
+        public virtual DbSet<Animals> Animals { get; set; }
     }
 }

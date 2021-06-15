@@ -128,12 +128,21 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AnimalsController.cs" />
+    <Compile Include="Controllers\CerrarSecionController.cs" />
+    <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RegistroController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\Verify.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Animales.cs">
+      <DependentUpon>Db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Animals.cs">
+      <DependentUpon>Db.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Catalgo.cs">
       <DependentUpon>Db.tt</DependentUpon>
@@ -153,11 +162,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Db.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\NewUser.cs" />
+    <Compile Include="Models\Files\FileVm.cs" />
+    <Compile Include="Models\Users\NewUser.cs" />
     <Compile Include="Models\TableVM\UsersVM.cs" />
     <Compile Include="Models\User.cs">
       <DependentUpon>Db.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Users\PutUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -218,9 +229,14 @@
     <Content Include="Views\Shared\_LayoutLoguin.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Add.cshtml" />
+    <Content Include="Views\User\Put.cshtml" />
+    <Content Include="Views\Files\Index.cshtml" />
+    <Content Include="Views\Animals\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Files\" />
+    <Folder Include="Views\CerrarSecion\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

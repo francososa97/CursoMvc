@@ -8,6 +8,9 @@
         <EntityTypeShape EntityType="CursoMVCModel.User" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CursoMVCModel.Catalgo" Width="1.5" PointX="3.875" PointY="1.625" />
         <AssociationConnector Association="CursoMVCModel.FK_User_Catalgo" />
+        <EntityTypeShape EntityType="CursoMVCModel.Animales" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="CursoMVCModel.Animals" Width="1.5" PointX="3" PointY="4.875" />
+        <AssociationConnector Association="CursoMVCModel.FK_Animals_Animales" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

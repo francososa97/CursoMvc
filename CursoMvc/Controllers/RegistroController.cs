@@ -43,5 +43,7 @@ namespace CursoMvc.Controllers
                 return Content($"ocurrio el error : {ex.Message}");
             }
         }
+
+
     }
 }

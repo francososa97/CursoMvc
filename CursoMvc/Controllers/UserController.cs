@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using CursoMvc.Models;
 using CursoMvc.Models.TableVM;
+using CursoMvc.Models.Users;
 
 namespace CursoMvc.Controllers
 {
@@ -56,6 +57,61 @@ namespace CursoMvc.Controllers
 
             }
             return Redirect(Url.Content("~/User/"));
+        }
+
+        [HttpGet]
+        public ActionResult Put(int id)
+        {
+            PutUser userEdit = new PutUser();
+            using (var db = new CursoMVCEntities())
+            {
+                var user = db.User.Find(id);
+                userEdit.Edad = (int)user.edad;
+                userEdit.Email = user.email;
+                userEdit.Id = user.id;
+            }
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Put(PutUser userEdit)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(userEdit);
+            }
+
+            using (var db = new CursoMVCEntities())
+            {
+                var user = db.User.Find(userEdit.Id);
+                user.edad = userEdit.Edad;
+                user.email = userEdit.Email;
+                user.id = userEdit.Id;
+
+                if(userEdit.Password != null && userEdit.Password.Trim() != "")
+                {
+                    user.contraseña = userEdit.Password;
+                }
+
+                db.Entry(user).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            return Redirect(Url.Content("~/User/"));
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+
+            using (var db = new CursoMVCEntities())
+            {
+                var user = db.User.Find(id);
+                user.idState = 3; //Eliminaremos
+                db.Entry(user).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            return Content("1");
         }
     }
 }

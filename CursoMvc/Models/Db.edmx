@@ -5,6 +5,21 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="CursoMVCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Animales">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Animals">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="IdAnimal" Type="int" />
+        </EntityType>
         <EntityType Name="Catalgo">
           <Key>
             <PropertyRef Name="id" />
@@ -22,6 +37,18 @@
           <Property Name="idState" Type="int" />
           <Property Name="edad" Type="int" />
         </EntityType>
+        <Association Name="FK_Animals_Animales">
+          <End Role="Animales" Type="Self.Animales" Multiplicity="0..1" />
+          <End Role="Animals" Type="Self.Animals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animales">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Animals">
+              <PropertyRef Name="IdAnimal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Catalgo_Catalgo">
           <End Role="Catalgo" Type="Self.Catalgo" Multiplicity="1" />
           <End Role="Catalgo1" Type="Self.Catalgo" Multiplicity="0..1" />
@@ -47,8 +74,14 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="CursoMVCModelStoreContainer">
+          <EntitySet Name="Animales" EntityType="Self.Animales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Animals" EntityType="Self.Animals" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Catalgo" EntityType="Self.Catalgo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Animals_Animales" Association="Self.FK_Animals_Animales">
+            <End Role="Animales" EntitySet="Animales" />
+            <End Role="Animals" EntitySet="Animals" />
+          </AssociationSet>
           <AssociationSet Name="FK_Catalgo_Catalgo" Association="Self.FK_Catalgo_Catalgo">
             <End Role="Catalgo" EntitySet="Catalgo" />
             <End Role="Catalgo1" EntitySet="Catalgo" />
@@ -80,6 +113,12 @@
             <End Role="Catalgo" EntitySet="Catalgo" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
+          <EntitySet Name="Animales" EntityType="CursoMVCModel.Animales" />
+          <EntitySet Name="Animals" EntityType="CursoMVCModel.Animals" />
+          <AssociationSet Name="FK_Animals_Animales" Association="CursoMVCModel.FK_Animals_Animales">
+            <End Role="Animales" EntitySet="Animales" />
+            <End Role="Animals" EntitySet="Animals" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Catalgo">
           <Key>
@@ -98,6 +137,35 @@
             </Principal>
             <Dependent Role="User">
               <PropertyRef Name="idState" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Animales">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Animals" Relationship="CursoMVCModel.FK_Animals_Animales" FromRole="Animales" ToRole="Animals" />
+        </EntityType>
+        <EntityType Name="Animals">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdAnimal" Type="Int32" />
+          <NavigationProperty Name="Animales" Relationship="CursoMVCModel.FK_Animals_Animales" FromRole="Animals" ToRole="Animales" />
+        </EntityType>
+        <Association Name="FK_Animals_Animales">
+          <End Type="CursoMVCModel.Animales" Role="Animales" Multiplicity="0..1" />
+          <End Type="CursoMVCModel.Animals" Role="Animals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animales">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Animals">
+              <PropertyRef Name="IdAnimal" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -123,6 +191,23 @@
               <MappingFragment StoreEntitySet="Catalgo">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Animales">
+            <EntityTypeMapping TypeName="CursoMVCModel.Animales">
+              <MappingFragment StoreEntitySet="Animales">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Animals">
+            <EntityTypeMapping TypeName="CursoMVCModel.Animals">
+              <MappingFragment StoreEntitySet="Animals">
+                <ScalarProperty Name="IdAnimal" ColumnName="IdAnimal" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

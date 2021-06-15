@@ -1,0 +1,53 @@
+﻿@model List<SelectListItem>
+@{
+    ViewBag.Title = "Animales";
+}
+
+<script>
+    var cboAnimalClas = document.getElementById("AnimalClass");
+    debugger;
+    cboAnimalClas = addEventListener("change", Refresh);
+    Refresh();
+
+    function Refresh() {
+        fetch("@Url.Content("~/Animal/Animal")" + "?IdAnimalClass=" + cboAnimalClas.value)
+                .then(function (result) {
+                    if (result.ok) {
+                        return result.json();
+                    }
+                }).then(function (data) {
+                    console.log(data)
+                    data.forEach(function (element){
+                        let cbo = document.getElementById("animal");
+                        let opt = document.getElementById("option");
+                        opt.appendChild(document.createTextNode(element.Text));
+                        opt.value = element.value;
+
+                        cbo.appendChild(opt);
+
+                    });
+            });
+
+    }
+
+
+</script>
+
+
+<h2>@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="form-group">
+            Clase
+            @Html.DropDownList("AnimalClass",Model, new {@class="form-control" ,id= "AnimalClass" })
+        </div>
+        <div class="form-control">
+            Animal
+            <select id="animal" name="animal">
+
+            </select>
+
+        </div>
+    </div>
+
+</div>

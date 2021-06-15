@@ -3,6 +3,30 @@
     ViewBag.Title = "Index";
 }
 
+<script>
+    function validationDelete(id) {
+
+        debugger;
+        var mensajeConfirmacion = "Esta seguro de elminar el usuario ?";
+
+        if (confirm(mensajeConfirmacion))
+        {
+
+            url = "@Url.Content("~/User/Delete/")" + id;
+
+            $.post(url, function(data)
+            {
+                if (data == "1") {
+                    document.location.href="@Url.Content("~/User/")"
+                } else {
+                    alert ("Ocurrio un error :( ")
+                }
+            });
+        }
+
+    }
+</script>
+
 <h2>Usuarios</h2>
     <div class="row">
         <div class="col-md-12">
@@ -24,6 +48,7 @@
                         <th>#</th>
                         <th>Email</th>
                         <th>Edad</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,6 +63,10 @@
                             </td>
                             <td>
                                 @usuario.edad
+                            </td>
+                            <td>
+                                <input onclick=validationDelete(@usuario.id); type="button" value="Eliminar" class="btn btn-danger"/>
+                                <input onclick="document.location.href='@Url.Content($"~/User/Put/{@usuario.id}")'" type="button" value="Editar" class="btn btn-default" />
                             </td>
                         </tr>
                     }
@@ -54,6 +83,9 @@
     </div>
 
 </div>
+
+
+
 
 
 
