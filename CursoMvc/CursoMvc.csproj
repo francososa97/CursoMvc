@@ -236,6 +236,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\" />
+    <Folder Include="ScriptBd\" />
     <Folder Include="Views\CerrarSecion\" />
   </ItemGroup>
   <ItemGroup>
